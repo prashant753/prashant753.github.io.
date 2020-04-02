@@ -1,7 +1,17 @@
 import * as React from "react";
 
-export interface IAppProps {}
+export interface IAppProps { }
 
-export default function IApp(props: IAppProps) {
-  return <h1>Hello React Typescript!</h1>;
+class App extends React.Component<IAppProps> {
+
+  public render() {
+    return (
+      <div>
+        Hello welcome to Isomorphic react
+        <h1>Hi prashant</h1>
+      </div>
+    )
+  }
 }
+
+export default App;
