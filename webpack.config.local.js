@@ -1,4 +1,4 @@
-import path from 'path';
+const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -61,12 +61,10 @@ module.exports = {
     new CleanWebpackPlugin(['./build']),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-        APP_ENV: JSON.stringify('dev'),
-        LOCAL: true,
-        WEBPACK: true
-    }
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      APP_ENV: JSON.stringify('dev'),
+      LOCAL: true,
+      WEBPACK: true
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
@@ -86,4 +84,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new DashboardPlugin()
   ],
+  devServer: {
+    open: true
+  }
 };

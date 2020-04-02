@@ -1,3 +1,26 @@
-.hello {
-    color: red;
+.login {
+    text-align: center;
+    background-image: url("https://images.unsplash.com/photo-1509822929063-6b6cfc9b42f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+    background-size: cover;
+    background-color: #ccc;
+    min-height: 589px;
+}
+
+body {
+    margin: auto;
+}
+
+.footer {
+    background-color: #212121;
+    text-align: center;
+    height: 51px;
+    margin-top: -16px;
+}
+
+.text-color {
+    color: white;
+}
+
+.footer-text {
+    padding-top: 15px;
 }

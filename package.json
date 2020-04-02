@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "@material-ui/core": "^4.9.8",
+    "@material-ui/icons": "^4.9.1",
+    "@types/material-ui": "^0.21.7",
     "@types/react": "^16.9.31",
     "@types/react-dom": "^16.9.6",
     "gitignore": "^0.6.0",
@@ -52,7 +55,7 @@
   "scripts": {
     "analyze": "source-map-explorer 'build/js/*.js'",
     "local": "APP_ENV=local APP_PUBLIC_PATH=/ NODE_ENV=development webpack-dashboard -- npm-run-all local:*",
-    "local:client": "webpack-dev-server --port 3000  --hot --config ./webpack.config.local.js",
+    "local:client": "webpack-dev-server --port 3002  --hot --config ./webpack.config.local.js",
     "build": "npm-run-all build:*",
     "build:dev": "webpack --mode development --config ./webpack.config.dev.js",
     "build:prod": "webpack --mode production --config webpack.config.prod.js",

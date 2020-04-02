@@ -14,7 +14,8 @@ module.exports = {
     output: {
         path: path.resolve('./build-dev'),
         publicPath: '/',
-        filename: 'bundle.js',
+        filename: 'js/[name].[hash].js',
+        chunkFilename: 'js/[name].[hash].js'
     },
     module: {
         rules: [
