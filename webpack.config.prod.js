@@ -6,18 +6,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const __APP_PUBLIC_PATH__ = process.env.APP_PUBLIC_PATH;
+const { APP_ENV } = process.env;
 module.exports = {
     mode: 'production',
     entry: {
         main: './src/index.tsx',
-        vendor: ['./src/vendor/modules.js']
     },
 
     output: {
         path: path.resolve('./build-prod'),
-        publicPath: __APP_PUBLIC_PATH__,
-        filename: 'js/[name].[chunkhash:8].js',
-        chunkFilename: 'js/[name].[chunkhash:8].js'
+        publicPath: '/',
+        filename: 'bundle.js',
     },
     module: {
         rules: [
@@ -47,16 +46,29 @@ module.exports = {
         ]
     },
     devtool: 'hidden-source-map',
+    resolve: {
+        extensions: ['.js', '.jsx', '.tsx', '.ts']
+    },
     plugins: [
-        new webpack.NoEmitOnErrorsPlugin(),
+        /**
+       * Needed for removing previous build
+       */
         new CleanWebpackPlugin(['./build-prod']),
+        new webpack.NoEmitOnErrorsPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].[hash:8].css',
             chunkFilename: '[id].[hash:8].css'
         }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production'),
+                APP_ENV: JSON.stringify('prod'),
+                __LOCAL__: false,
+                WEBPACK: true
+            }
+        }),
         new HtmlWebpackPlugin({
-            favicon: './src/assets/favicon.ico',
-            template: './src/index.html',
+            template: './public/index.html',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
@@ -69,11 +81,6 @@ module.exports = {
                 minifyCSS: true,
                 minifyURLs: true
             }
-        }),
-        new webpack.Defineproxy({
-            __APP_ENV__: JSON.stringify('production'),
-            NODE_ENV: JSON.stringify('production'),
-            __LOCAL__: false,
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,

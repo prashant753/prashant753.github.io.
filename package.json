@@ -23,6 +23,8 @@
     "@babel/preset-typescript": "^7.9.0",
     "@types/enzyme": "^3.10.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/express": "^4.17.4",
+    "@types/fs-extra": "^8.1.0",
     "@types/html-webpack-plugin": "^3.2.2",
     "@types/jest": "^25.1.4",
     "@types/webpack": "^4.41.10",
@@ -30,6 +32,7 @@
     "clean-webpack-plugin": "0.1.19",
     "css-loader": "^3.4.2",
     "file-loader": "^6.0.0",
+    "fs-extra": "^9.0.0",
     "html-webpack-plugin": "^4.0.4",
     "mini-css-extract-plugin": "^0.9.0",
     "npm-run-all": "^4.1.5",
@@ -49,10 +52,10 @@
   "scripts": {
     "analyze": "source-map-explorer 'build/js/*.js'",
     "local": "APP_ENV=local APP_PUBLIC_PATH=/ NODE_ENV=development webpack-dashboard -- npm-run-all local:*",
-    "local:client": "webpack-dev-server --port 3000  --hot --config ./webpack.config.development.js",
+    "local:client": "webpack-dev-server --port 3000  --hot --config ./webpack.config.local.js",
     "build": "npm-run-all build:*",
     "build:dev": "webpack --mode development --config ./webpack.config.dev.js",
-    "build:prod": "webpack --mode production --config webpack.config.js",
+    "build:prod": "webpack --mode production --config webpack.config.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -5,7 +5,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const __APP_PUBLIC_PATH__ = process.env.APP_PUBLIC_PATH;
 module.exports = {
     mode: 'production',
     entry: {
@@ -14,9 +13,8 @@ module.exports = {
 
     output: {
         path: path.resolve('./build-dev'),
-        publicPath: __APP_PUBLIC_PATH__,
-        filename: 'js/[name].[chunkhash:8].js',
-        chunkFilename: 'js/[name].[chunkhash:8].js'
+        publicPath: '/',
+        filename: 'bundle.js',
     },
     module: {
         rules: [
@@ -53,18 +51,30 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.js', '.jsx','.tsx','.ts']
+        extensions: ['.js', '.jsx', '.tsx', '.ts']
     },
     devtool: 'hidden-source-map',
     plugins: [
-        new webpack.NoEmitOnErrorsPlugin(),
+        /**
+         * Needed for removing previous build
+         */
         new CleanWebpackPlugin(['./build-dev']),
+        /**
+        * Needed for Hot module reloading
+        */
+        new webpack.HotModuleReplacementPlugin(),
+        /**
+         * Causes the relative path of the module to be used in HMR
+         * Recommended by docs for development configurations: https://webpack-v3.jsx.app/plugins/named-modules-plugin/
+         */
+        new webpack.NamedModulesPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].[hash:8].css',
             chunkFilename: '[id].[hash:8].css'
         }),
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './public/index.html',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
@@ -79,9 +89,11 @@ module.exports = {
             }
         }),
         new webpack.DefinePlugin({
-            __APP_ENV__: JSON.stringify('dev'),
-            NODE_ENV: JSON.stringify('dev'),
-            __LOCAL__: false
+            'process.env': {
+                NODE_ENV: JSON.stringify('development'),
+                APP_ENV: JSON.stringify('dev'),
+                WEBPACK: true
+            }
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,

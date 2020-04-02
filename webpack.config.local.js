@@ -1,11 +1,10 @@
-const path = require('path');
+import path from 'path';
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const { __APP_PUBLIC_PATH__ } = process.env;
-const { APP_ENV } = process.env;
 module.exports = {
   mode: 'development',
   entry: {
@@ -62,12 +61,15 @@ module.exports = {
     new CleanWebpackPlugin(['./build']),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"development"',
-      __APP_ENV__: JSON.stringify(APP_ENV),
-      __LOCAL__: APP_ENV === 'local'
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+        APP_ENV: JSON.stringify('dev'),
+        LOCAL: true,
+        WEBPACK: true
+    }
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './public/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
