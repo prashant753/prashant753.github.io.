@@ -9,9 +9,7 @@ const express = require('express');
 const path = require('path');
 
 const env = process.env.APP_ENV;
-console.log(process.env.NODE_ENV, '-0-0-')
 const app = express();
-console.log('---', path.resolve(`${__dirname}/build-${env}`))
 app.use('/', express.static(path.resolve(`${__dirname}/build-dev`)));
 
 app.listen(3000, () => {
