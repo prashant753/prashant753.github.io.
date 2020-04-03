@@ -44,6 +44,19 @@ module.exports = {
       { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       {
+        test: /\.less$/,
+        use: [{
+          loader: "style-loader"
+        }, {
+          loader: "css-loader"
+        }, {
+          loader: "less-loader",
+          options: {
+            javascriptEnabled: true
+          }
+        }]
+      },
+      {
         test: /\.(gif|png|jpe?g|svg|ico)$/i,
         use: [{ loader: 'file-loader', options: { name: 'images/[name].[ext]' } }]
       },
