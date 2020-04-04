@@ -70,6 +70,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.tsx', '.ts']
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new CleanWebpackPlugin(['./build']),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),

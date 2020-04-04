@@ -12,6 +12,6 @@ const env = process.env.APP_ENV;
 const app = express();
 app.use('/', express.static(path.resolve(`${__dirname}/build-dev`)));
 
-app.listen(3000, () => {
-    process.stdout.write('Front Server Started at port 3000');
+app.listen(5000, () => {
+    process.stdout.write('Front Server Started at port 5000');
 });

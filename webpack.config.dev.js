@@ -27,13 +27,6 @@ module.exports = {
                 },
             },
             {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader'
-                }
-            },
-            {
                 test: /\.css$/,
                 use: ['style-loader', { loader: 'css-loader' }]
             },
@@ -41,6 +34,19 @@ module.exports = {
                 test: /\.scss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             },
+            {
+                test: /\.less$/,
+                use: [{
+                  loader: "style-loader"
+                }, {
+                  loader: "css-loader"
+                }, {
+                  loader: "less-loader",
+                  options: {
+                    javascriptEnabled: true
+                  }
+                }]
+              },
             {
                 test: /\.(gif|png|jpe?g|svg|ico)$/i,
                 use: [{ loader: 'file-loader', options: { name: 'images/[name].[hash:8].[ext]' } }]
