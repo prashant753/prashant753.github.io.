@@ -1,10 +1,10 @@
-// ['APP_ENV'].forEach((appEnv) => {
-//     if (!process.env[appEnv]) {
-//         process.stdout.write('APP_ENV not defined \n');
-//         process.exit(1);
-//     }
-//     process.stdout.write(`APP_ENV is defined as ${process.env[appEnv]} \n`);
-// });
+['APP_ENV'].forEach((appEnv) => {
+    if (!process.env[appEnv]) {
+        process.stdout.write('APP_ENV not defined \n');
+        process.exit(1);
+    }
+    process.stdout.write(`APP_ENV is defined as ${process.env[appEnv]} \n`);
+});
 const express = require('express');
 const path = require('path');
 
