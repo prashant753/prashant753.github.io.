@@ -7,14 +7,14 @@
 });
 const express = require('express');
 const path = require('path');
+const webpack = require('webpack');
 
-const env = process.env.APP_ENV;
 const app = express();
 if (process.env.APP_ENV === 'local') {
     /**
      * Get the development configuration from webpack.config.
      */
-    const config = require('../webpack.config.local.js');
+    const config = require('./webpack.config.local.js');
 
     /**
      * Create a webpack compiler which will output our bundle.js based on the application's code
@@ -51,7 +51,7 @@ if (process.env.APP_ENV === 'local') {
      * If the process is production, just serve the file from the dist folder
      * Build should have been run beforehand
      */
-    app.use(express.static(path.resolve(__dirname, '../dist')));
+    app.use(express.static(path.resolve(__dirname, './build')));
 }
 
 app.use('/', express.static(path.resolve(`${__dirname}/build-dev`)));

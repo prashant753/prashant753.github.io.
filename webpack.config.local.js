@@ -7,9 +7,10 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
 const { __APP_PUBLIC_PATH__ } = process.env;
 module.exports = {
   mode: 'development',
-  entry: {
-    main: './src/index.tsx',
-  },
+  entry: [
+    'webpack-hot-middleware/client?reload=true',
+    './src/index.tsx',
+  ],
   output: {
     path: path.resolve('./build'),
     publicPath: __APP_PUBLIC_PATH__,

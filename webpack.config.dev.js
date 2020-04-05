@@ -77,8 +77,8 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new MiniCssExtractPlugin({
-            filename: '[name].[hash:8].css',
-            chunkFilename: '[id].[hash:8].css'
+            filename: 'css/[name].[hash:8].css',
+            chunkFilename: 'css/[id].[hash:8].css'
         }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
