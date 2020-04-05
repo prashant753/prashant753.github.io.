@@ -37,6 +37,19 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             },
             {
+                test: /\.less$/,
+                use: [{
+                  loader: "style-loader"
+                }, {
+                  loader: "css-loader"
+                }, {
+                  loader: "less-loader",
+                  options: {
+                    javascriptEnabled: true
+                  }
+                }]
+              },
+            {
                 test: /\.(gif|png|jpe?g|svg|ico)$/i,
                 use: [{ loader: 'file-loader', options: { name: 'images/[name].[hash:8].[ext]' } }]
             },
@@ -57,8 +70,8 @@ module.exports = {
         new CleanWebpackPlugin(['./build-prod']),
         new webpack.NoEmitOnErrorsPlugin(),
         new MiniCssExtractPlugin({
-            filename: '[name].[hash:8].css',
-            chunkFilename: '[id].[hash:8].css'
+            filename: 'css/[name].[hash:8].css',
+            chunkFilename: 'css/[id].[hash:8].css'
         }),
         new webpack.DefinePlugin({
             'process.env': {
