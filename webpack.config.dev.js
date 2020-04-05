@@ -4,7 +4,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
+const __APP_PUBLIC_PATH__ = process.env.APP_PUBLIC_PATH;
 module.exports = {
     mode: 'production',
     entry: {
@@ -13,18 +15,33 @@ module.exports = {
 
     output: {
         path: path.resolve('./build-dev'),
-        publicPath: '/',
+        publicPath: __APP_PUBLIC_PATH__,
         filename: 'js/[name].[hash].js',
         chunkFilename: 'js/[name].[hash].js'
     },
+    optimization: {
+        minimizer: [
+            // we specify a custom UglifyJsPlugin here to get source maps in production
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                uglifyOptions: {
+                    compress: false,
+                    ecma: 6,
+                    mangle: true
+                },
+                sourceMap: true
+            })
+        ]
+    },  
     module: {
         rules: [
             {
                 test: /\.(js|jsx|tsx|ts)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
-                },
+                    loader: 'babel-loader'
+                }
             },
             {
                 test: /\.css$/,
@@ -57,28 +74,27 @@ module.exports = {
             }
         ]
     },
+    devtool: 'hidden-source-map',
     resolve: {
         extensions: ['.js', '.jsx', '.tsx', '.ts']
     },
-    devtool: 'hidden-source-map',
     plugins: [
         /**
-         * Needed for removing previous build
-         */
+       * Needed for removing previous build
+       */
         new CleanWebpackPlugin(['./build-dev']),
-        /**
-        * Needed for Hot module reloading
-        */
-        new webpack.HotModuleReplacementPlugin(),
-        /**
-         * Causes the relative path of the module to be used in HMR
-         * Recommended by docs for development configurations: https://webpack-v3.jsx.app/plugins/named-modules-plugin/
-         */
-        new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[hash:8].css',
             chunkFilename: 'css/[id].[hash:8].css'
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production'),
+                APP_ENV: JSON.stringify('prod'),
+                __LOCAL__: false,
+                WEBPACK: true
+            }
         }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
@@ -95,13 +111,6 @@ module.exports = {
                 minifyURLs: true
             }
         }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('development'),
-                APP_ENV: JSON.stringify('dev'),
-                WEBPACK: true
-            }
-        }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             debug: false
@@ -114,5 +123,4 @@ module.exports = {
             reportFilename: 'bundle-analysis.html'
         })
     ]
-
 };

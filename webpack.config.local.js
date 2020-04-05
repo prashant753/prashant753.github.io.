@@ -100,6 +100,13 @@ module.exports = {
     new DashboardPlugin()
   ],
   devServer: {
-    open: true
+    open: true,
+    contentBase: path.resolve('./build'),
+    overlay: true,
+    quiet: true
+  },
+  optimization: {
+    noEmitOnErrors: true,
+    minimize: true
   }
 };

@@ -4,9 +4,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const __APP_PUBLIC_PATH__ = process.env.APP_PUBLIC_PATH;
-const { APP_ENV } = process.env;
 module.exports = {
     mode: 'production',
     entry: {
@@ -15,10 +15,25 @@ module.exports = {
 
     output: {
         path: path.resolve('./build-prod'),
-        publicPath: '/',
+        publicPath: __APP_PUBLIC_PATH__,
         filename: 'js/[name].[hash].js',
         chunkFilename: 'js/[name].[hash].js'
     },
+    optimization: {
+        minimizer: [
+            // we specify a custom UglifyJsPlugin here to get source maps in production
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true,
+                uglifyOptions: {
+                    compress: false,
+                    ecma: 6,
+                    mangle: true
+                },
+                sourceMap: true
+            })
+        ]
+    },  
     module: {
         rules: [
             {
