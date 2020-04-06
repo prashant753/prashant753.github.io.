@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import Login from '../modules/login/Login';
+import Login from '@modules/login/Login';
 
 export class Navigation extends React.Component<any, any> {
   public render() {

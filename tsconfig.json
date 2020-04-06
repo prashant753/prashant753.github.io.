@@ -1,22 +1,49 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react",
-    "module": "amd",
+    "experimentalDecorators": true,
+    "target": "es5",
     "noImplicitAny": true,
-    "outDir": "./dist/",
-    "preserveConstEnums": true,
-    "removeComments": true,
-    "sourceMap": false,
-    "target": "es6",
-    "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "alwaysStrict": true,
-    "strictNullChecks": false,
-    "downlevelIteration": true
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "baseUrl": "src",
+    "paths": {
+      "*": [
+        "types/*"
+      ],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      "@models/*": ["domain/models/*"],
+      "@modules/*": ["modules/*"],
+      "@navigation/*": ["navigation/*"],
+      "@network/*": ["network/*"],
+      "@repositories/*": ["domain/repositories/*"],
+      "@screens/*": ["screens/*"],
+      "@services/*": ["services/*"],
+      "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"],
+      "@mocks/*": ["../__mocks__/*"],
+      "@type/*": ["types/*"]
+    },
   },
   "include": [
-    "./src/"
+    "src",
+    "__tests__/setupEnzyme.ts"
   ],
   "exclude": [
     "node_modules"
