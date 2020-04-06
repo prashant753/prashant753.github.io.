@@ -68,7 +68,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.tsx', '.ts']
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
+    alias: {
+      modules: path.resolve(__dirname, 'src/modules/')
+    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -100,6 +103,13 @@ module.exports = {
     new DashboardPlugin()
   ],
   devServer: {
-    open: true
+    open: true,
+    contentBase: path.resolve('./build'),
+    overlay: true,
+    quiet: true
+  },
+  optimization: {
+    noEmitOnErrors: true,
+    minimize: true
   }
 };

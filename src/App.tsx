@@ -1,20 +1,21 @@
-import * as React from "react";
-import Login from './modules/login/Login';
+import * as React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { Provider } from 'react-redux';
+import store from './state_management/store';
+import Navigation from './navigation/Navigation'
 
-export interface IAppProps { }
+const history = createBrowserHistory();
 
-class App extends React.Component<IAppProps> {
+class App extends React.Component<any> {
 
   public render() {
     return (
-      <React.Fragment>
-        <div className="login">
-          <Login />
-        </div>
-        <footer className="footer">
-          <p className="text-color footer-text">© Prashant. All rights reserved.</p>
-        </footer>
-      </React.Fragment>
+        <Provider store={store}>
+        <BrowserRouter>
+          <Navigation history={history} />
+        </BrowserRouter>
+      </Provider>
     )
   }
 }
