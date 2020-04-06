@@ -6,9 +6,8 @@ import store from './state_management/store';
 import Navigation from './navigation/Navigation'
 
 const history = createBrowserHistory();
-export interface IAppProps { }
 
-class App extends React.Component<IAppProps> {
+class App extends React.Component<any> {
 
   public render() {
     return (

@@ -8,7 +8,8 @@ module.exports = {
         "^.+\\.svg$": "<rootDir>/svgTransform.js"
     },
     "moduleNameMapper": {
-        "^.+\\.(css|scss|less)$": "identity-obj-proxy"
+        "^.+\\.(css|scss|less)$": "identity-obj-proxy",
+        "^modules(.*)$": "<rootDir>/src/modules$1",
       },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
     "moduleFileExtensions": [
