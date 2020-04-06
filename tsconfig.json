@@ -43,7 +43,7 @@
   },
   "include": [
     "src",
-    "__tests__/setupEnzyme.ts"
+    "__tests__/setupEnzyme.ts", "__tests__"
   ],
   "exclude": [
     "node_modules"

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { Provider } from 'react-redux';
