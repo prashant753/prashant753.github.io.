@@ -27,6 +27,7 @@
   "description": "",
   "version": "1.0.0",
   "main": "index.js",
+  "homepage": "https://prashant753.github.io/",
   "devDependencies": {
     "@babel/cli": "^7.8.3",
     "@babel/core": "^7.8.3",
@@ -84,7 +85,7 @@
     "build:dev": "webpack --config webpack.config.dev.js",
     "build:prod": "webpack --config webpack.config.prod.js",
     "predeploy": "yarn run build:prod",
-    "deploy": "gh-pages -d build-prod",
+    "deploy": "gh-pages -b master -d build-prod",
     "test": "jest -u --coverage",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
