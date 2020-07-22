@@ -84,7 +84,6 @@ web_modules/
 build
 /build
 /build-dev
-/build-prod
 
 # Gatsby files
 .cache/
